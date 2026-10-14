@@ -1,0 +1,2 @@
+import type {Product} from './catalog';
+export function quoteMessage(products:Product[],cart:Record<string,number>,demo=false){const lines=products.filter(p=>cart[p.id]>0).map((p,i)=>`${i+1}. ${p.name}\nCódigo: ${p.code}\nQuantidade: ${cart[p.id]}`);return ['Olá! Gostaria de um orçamento na Carvia.',demo?'CATÁLOGO DE DEMONSTRAÇÃO — produtos ilustrativos.':'',...lines,'Por favor, confirme preços, disponibilidade e aplicação no meu veículo.'].filter(Boolean).join('\n\n');}

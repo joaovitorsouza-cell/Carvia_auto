@@ -1,0 +1,10 @@
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import Home from '../app/page';
+import {CustomerAuthProvider} from '../components/CustomerAuth';
+import {products} from '../lib/catalog';
+const origin='https://car-via-auto-pecas.frostytetra64.chatgpt.site';
+const demoProducts=products.map((p,i)=>({...p,vehicles:i<3?[{make:'Marca demonstrativa',model:'Carro exemplo',yearFrom:2020,yearTo:2023,engine:'1.0 (exemplo)'}]:[]}));
+window.fetch=async (input:any)=>{const url=typeof input==='string'?input:input.url;const response=url==='/api/catalog'?{products:demoProducts,demo:true,whatsapp:''}:url==='/api/me'?{canManage:false}:url==='/api/auth/config'?{enabled:false}:{error:'Abra a loja hospedada para acessar contas e pedidos. Compras indisponíveis nesta demonstração.'};return new Response(JSON.stringify(response),{status:['/api/catalog','/api/me','/api/auth/config'].includes(url)?200:503,headers:{'Content-Type':'application/json'}})};
+document.addEventListener('click',e=>{const a=(e.target as Element).closest('a');if(a?.getAttribute('href')?.startsWith('/')){e.preventDefault();location.href=origin+a.getAttribute('href')}});
+createRoot(document.getElementById('root')!).render(<CustomerAuthProvider><div className="standalone-note">Arquivo de demonstração · aplicações e produtos ilustrativos. <a href={origin}>Abrir loja hospedada</a></div><Home/></CustomerAuthProvider>);

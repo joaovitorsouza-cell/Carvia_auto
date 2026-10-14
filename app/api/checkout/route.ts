@@ -1,11 +1,13 @@
 import {env} from 'cloudflare:workers';
+import {customerFor} from '../../../lib/customer-auth';
 import {catalogProducts} from '../../../db/schema';
 import {getDb} from '../../../db';
 import {orders} from '../../../db/schema';
 import {eq} from 'drizzle-orm';
 export async function POST(req:Request){
- const user=req.headers.get('oai-authenticated-user-id');
+ const identity=await customerFor(req);const user=identity?.id;
  if(!user)return Response.json({error:'Entre na sua conta para continuar.'},{status:401});
+ if(!identity?.verified)return Response.json({error:'Confirme seu e-mail antes de continuar com a compra.'},{status:403});
  if(req.headers.get('origin')!==new URL(req.url).origin)return Response.json({error:'Origem inválida.'},{status:403});
  const config=env as unknown as Record<string,string>;
  if(config.SALES_ENABLED!=='true'||!config.MERCADO_PAGO_ACCESS_TOKEN)return Response.json({error:'Esta loja está em configuração. Produtos e preços são exemplos; pagamentos ainda não estão habilitados.'},{status:503});

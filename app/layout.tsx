@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import {CustomerAuthProvider} from "../components/CustomerAuth";
 
 export const metadata: Metadata = {
   title: "Car Via Auto Peças",
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased"><CustomerAuthProvider>{children}</CustomerAuthProvider></body>
     </html>
   );
 }

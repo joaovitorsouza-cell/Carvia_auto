@@ -1,4 +1,5 @@
-export type Product={id:string;name:string;brand:string;code:string;category:string;price:number;stock:number;kind:string;description:string;imageUrl?:string;active?:boolean};
+import type {Vehicle} from './vehicles';
+export type Product={id:string;name:string;brand:string;code:string;category:string;price:number;stock:number;kind:string;description:string;imageUrl?:string;images?:string[];vehicles?:Vehicle[];manufacturerCode?:string;minStock?:number;revision?:number;active?:boolean};
 export const products = [
 {id:'cv001',name:'Disco de freio ventilado',brand:'Linha de exemplo',code:'CV-FR001',category:'Freios',price:14990,stock:12,kind:'disc',description:'Disco ventilado para o sistema de frenagem. Verifique medidas e aplicação antes de comprar.'},
 {id:'cv002',name:'Filtro de óleo blindado',brand:'Linha de exemplo',code:'CV-FL002',category:'Filtros',price:2990,stock:20,kind:'filter',description:'Filtro de reposição. A aplicação deve ser conferida pelo código do fabricante.'},

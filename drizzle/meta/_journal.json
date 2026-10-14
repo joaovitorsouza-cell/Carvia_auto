@@ -15,6 +15,20 @@
       "when": 1791767650261,
       "tag": "0001_tired_silver_sable",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791953256240,
+      "tag": "0002_odd_famine",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1792021701551,
+      "tag": "0003_handy_mysterio",
+      "breakpoints": true
     }
   ]
 }
